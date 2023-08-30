@@ -16,7 +16,7 @@ app.get("/", (req, res) => {
 
 // biar bisa running
 app.listen(3000, () => {
-  console.log("Hai Dev, Servermu sudah jalan di https://localhost:3000");
+  console.log("Hai Dev, Servermu sudah jalan di http://localhost:3000");
 });
 
 // jalaninnya dengan menulis node app.js di terminal
