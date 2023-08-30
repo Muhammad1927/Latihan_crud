@@ -14,6 +14,19 @@ app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
+app.post('/', (req, res) => {
+    res.send('post data')
+})
+
+app.put('/', (req, res) => {
+    res.send('update data')
+})
+
+app.delete('/', (req, res) => {
+    res.send('delete data')
+})
+
+
 // biar bisa running
 app.listen(3000, () => {
   console.log("Hai Dev, Servermu sudah jalan di http://localhost:3000");
