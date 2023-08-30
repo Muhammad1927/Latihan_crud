@@ -7,7 +7,7 @@
   },
   "name": "practies_my_server",
   "description": "1. Buat Repo di Github",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "app.js",
   "scripts": {
     "test": "npx jest",
