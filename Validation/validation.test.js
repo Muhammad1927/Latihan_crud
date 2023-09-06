@@ -1,4 +1,4 @@
-const { nameValidation } = require("./validation");
+const { nameValidation, ageValidation } = require("./validation");
 describe("testing validation", () => {
   test("when input less 3 character should error", () => {
     let result = nameValidation("ab");
@@ -41,4 +41,22 @@ describe("testing validation", () => {
 
     expect(result).toEqual({ error: false, message: "OK", data: "Samsul" });
   });
+});
+
+describe("testing ageValidation", () => {
+  test("when less 12 should error", () => {
+    let result = ageValidation(10);
+
+    expect(result).toEqual({ error: true, message: "umur harus lebih dari 12" });
+  });
+  test("when more 80 should error", () => {
+    let result = ageValidation(90);
+
+    expect(result).toEqual({
+      error: true,
+      message: "umur harus kurang dari 80",
+    });
+  });
+
+
 });

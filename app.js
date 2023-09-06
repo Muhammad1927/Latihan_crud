@@ -1,25 +1,36 @@
 const express = require("express");
-
 const app = express();
+const { nameValidation, ageValid } = require("./validation/validation");
+// Example
+/*
+    - req = singkatan dari request. Yang isinya yang dikirimkan oleh client. Contoh seperti body, parameter, query
+    - res = singkatan dari response. Yang isinya kita kirim ke client. Contoh seperti data, json, html, dan codeHTTP (default:200)
+*/
 
-app.use(express.json())
-
-// contoh simple sederhana
-/**
- * req adalah singkatan dari request yg isi yg dikirimkan oleh client .
- * contoh seperti body, parameter, query
- * res adalah singkatan dari responss yang isinya kita kirim ke client.
- * contoh seperti data, json,  html, dan HTTP (default:200)
- */
+app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.send("Hello World");
+  res.send("Hello world");
 });
 
-app.post('/', (req, res) => {
-    let name = req.body.name
-    res.send('Assalamualaikum kak ' + name)
-})
+app.post("/", (req, res) => {
+  if (!req.body.name) {
+    return res.send({ error: true, message: "tidak memiliki parameter nama" });
+  }
+
+  if (!req.body.age) {
+    return res.send({ error: true, message: "tidak memiliki parameter umur" });
+  }
+
+  let { name, age } = req.body;
+
+  // Mengambil data nama
+  let realNameRes = nameValidation(name);
+  let realAgeRes = ageValid(age);
+
+  if (realNameRes.error) {
+    return res.send(realNameRes, realAgeRes);
+  }
 
 app.put('/', (req, res) => {
     res.send('update data')
@@ -30,10 +41,12 @@ app.delete('/', (req, res) => {
 })
 
 
-// biar bisa running
+app.delete("/", (req, res) => {
+  res.send("Delete data");
+});
 app.listen(3000, () => {
   console.log("Hai Dev, Servermu sudah jalan di http://localhost:3000");
 });
 
-// jalaninnya dengan menulis node app.js di terminal
-// matikan server dengan ctrl+c
+// Untuk menjalankan ketik node app.js di terminal. Untuk cancel tekan Ctr + c.
+})
