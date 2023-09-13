@@ -6,6 +6,9 @@ const createData = (bank, data) => {
 const findById = (bank, id) => {
   return bank.find((item) => item.id === id);
 };
+const findByName = (bank, name) => {
+  return bank.find((item) => item.name.includes(name));
+};
 
 const updateData = (bank, id, value) => {
   const index = bank.findIndex((value) => value.id == id);
@@ -18,4 +21,4 @@ const deleteData = (bank, id) => {
   bank.splice(index, 1);
   return bank;
 };
-module.exports = { createData, findById, updateData, deleteData };
+module.exports = { createData, findById, updateData, deleteData, findByName };

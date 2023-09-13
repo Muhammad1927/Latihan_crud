@@ -17,17 +17,22 @@ app.get("/", getDataUserHandler);
 
 app.post("/", postDataUserHandler)
 
+
 app.put('/', putDataUserHandler)
 
 app.delete("/", deleteDataUserHandler);
 
-
+const port = 3001
 
 
 
 app.listen(3000, () => {
-  console.log("Hai Dev, Servermu sudah jalan di http://localhost:3000");
+  console.log("Hai Dev, Servermu sudah jalan di http://localhost:" + port);
 });
+
+const server = app.listen();
+
+module.exports = server;
 
 // Untuk menjalankan ketik node app.js di terminal. Untuk cancel tekan Ctr + c.
 

@@ -1,4 +1,4 @@
-const { createData, findById, updateData, deleteData } = require("./CrudObject");
+const { createData, findById, updateData, deleteData, findByName } = require("./CrudObject");
 
 describe("Test Crud Object", () => {
   test("when create new object should success", () => {
@@ -47,5 +47,14 @@ describe("Test Crud Object", () => {
     let result = deleteData(bank, 1);
 
     expect(result).toEqual([{ id: 2, name: "bambang" }]);
+  });
+  test("when find a object by name should success", () => {
+    let bank = [
+      { id: 1, name: "mufid" },
+      { id: 2, name: "bambang" },
+    ];
+    let result = findByName(bank, 'mufid');
+
+    expect(result).toEqual({ id: 1, name: "mufid" });
   });
 });
