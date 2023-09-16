@@ -2,31 +2,31 @@ const request = require("supertest");
 const app = require("./app");
 
 describe("Test in app", () => {
-  test("when get root sould success", async () => {
-    let respone = await request(app).get("/");
+  test("when get root should success", async () => {
+    let response = await request(app).get("/");
 
-    expect(respone.status).toBe(200); // ===
+    expect(response.status).toBe(200); // ===
     // '5' === 5 => false
-    expect(respone.body).toEqual({ data: [] }); // ==
-    // '5' === 5 => true
+    expect(response.body).toEqual({ data: [] }); // ==
+    // '5' == 5 => true
   }, 5000);
 
-  test("when post root sould success", async () => {
-    const data = { name: "Muhammad", age: 17 };
-    let respone = await request(app).post("/").send(data);
+  test("when post data should success", async () => {
+    const data = { name: "ariska", age: 23 };
+    let response = await request(app).post("/").send(data);
 
-    expect(respone.status).toBe(200);
+    expect(response.status).toBe(200);
 
-    expect(respone.body.data[0].name).toBe("Muhammad");
-    expect(respone.body.data[0].age).toBe(17);
-    expect(typeof respone.body.data[0].id).toBe("number");
+    expect(response.body.data[0].name).toBe("ariska");
+    expect(response.body.data[0].age).toBe(23);
+    expect(typeof response.body.data[0].id).toBe("number");
   });
 
   test("when test flow should success", async () => {
     // masukkan semua data
-    const data1 = { name: "Muhammad", age: 17 };
-    const data2 = { name: "hidayat", age: 18 };
-    const data3 = { name: "ppqita", age: 19 };
+    const data1 = { name: "ariska", age: 23 };
+    const data2 = { name: "hidayat", age: 30 };
+    const data3 = { name: "ppqita", age: 20 };
 
     await request(app).post("/").send(data1);
     await request(app).post("/").send(data2);
@@ -49,17 +49,16 @@ describe("Test in app", () => {
     // ambil data terbaru
     let response2 = await request(app).get("/");
 
-    console.log(response2)
     // cocokkan
     expect(response2.body).toEqual({
       data: [
-        { id: id1, name: "Muhammad", age: 17 },
+        { id: id1, name: "ariska", age: 23 },
         { id: id3, name: "surakarta" },
       ],
     });
   });
 
   afterAll(() => {
-    app.close(); // menutup server
+    app.close(); // Menutup server setelah semua tes selesai
   });
 });

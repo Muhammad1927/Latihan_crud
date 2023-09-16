@@ -4,7 +4,9 @@ const deleteDataUserHandler = (req, res) => {
   const id = req.body.id;
 
   removeData(id);
-  res.send({ error: false, message: "berhasil" });
+
+
+  res.send({ error: false, messaeg: "berhasil" });
 };
 
 module.exports = { deleteDataUserHandler };

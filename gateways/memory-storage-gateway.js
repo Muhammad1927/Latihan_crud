@@ -1,10 +1,15 @@
-const { createData, updateData, findByName, deleteData,  } = require("../crud/CrudObject");
+const {
+  createData,
+  updateData,
+  deleteData,
+  findByName,
+} = require("../crud/CrudObject");
 
 let dataMemory = [];
 
 const savingData = (name, age) => {
   let id = Math.ceil(Math.random() * 1000);
-  dataMemory = createData(dataMemory, {id, name, age });
+  dataMemory = createData(dataMemory, { id, name, age });
 };
 
 const showAllData = () => {
@@ -12,21 +17,30 @@ const showAllData = () => {
 };
 
 const getDataByName = (name) => {
-  return findByName(dataMemory, name)
-}
+  return findByName(dataMemory, name);
+};
 
-const editNamaData = (id, name) => {
+const editNamaData = (id, name, age) => {
+  dataMemory = updateData(dataMemory, id, name, age);
 
-  dataMemory = updateData(dataMemory, id, name);
-
-  return dataMemory
-}
+  return dataMemory;
+};
 
 const removeData = (id) => {
-  dataMemory = deleteDataData(dataMemory, id)
-  return dataMemory
-}
 
+  if (typeof id === "string") {
+    id = parseInt(id);
+  }
+  
+  dataMemory = deleteData(dataMemory, id);
+  
+  return dataMemory;
+};
 
-
-module.exports = { savingData, showAllData, editNamaData, removeData, findByName };
+module.exports = {
+  savingData,
+  showAllData,
+  editNamaData,
+  removeData,
+  getDataByName,
+};

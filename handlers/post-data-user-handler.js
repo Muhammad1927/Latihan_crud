@@ -2,30 +2,43 @@ const {
   savingData,
   showAllData,
 } = require("../gateways/memory-storage-gateway");
-const { nameValidation, ageValid } = require("../validation/validation");
+const { nameValidation, ageValidation } = require("../validation/validation");
 
 const postDataUserHandler = (req, res) => {
+  // mengecek property name
   if (!req.body.name) {
-    return res.send({ error: true, message: "tidak memiliki parameter nama" });
+    res.status(400);
+    return res.send({ error: true, message: "tidak memiliki paramater nama" });
   }
-
+  // @todo pengecekan property umur
   if (!req.body.age) {
-    return res.send({ error: true, message: "tidak memiliki parameter umur" });
+    res.status(400);
+    return res.send({ error: true, message: "tidak memiliki paramater umur" });
   }
 
+  // mengambil data nama
+  // let name = req.body.name; // mengambil data name
   let { name, age } = req.body;
+  // @todo pemanggilan data umur
 
-  // Mengambil data nama
+  // melakukan validasi nama
   let realNameRes = nameValidation(name);
-  let realAgeRes = ageValid(age);
+  let realAgeRes = ageValidation(age);
+  // @todo melakukan validasi umur
 
   if (realNameRes.error) {
-    return res.send(realNameRes, realAgeRes);
+    res.status(400);
+    return res.send(realNameRes);
+  }
+  // @todo lempar error umur
+  if (realAgeRes.error) {
+    res.status(400);
+    return res.send(realAgeRes);
   }
 
-  savingData(realNameRes.data, realAgeRes.data);
+  savingData(realNameRes.data, realAgeRes.data); // simpan data di memori (memoryGateway)
 
-  res.send({ data: showAllData() });
+  res.send({ data: showAllData() }); // @todo menambahkan data umur yg sudah divalidasi
 };
 
 module.exports = { postDataUserHandler };

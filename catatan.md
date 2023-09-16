@@ -36,3 +36,15 @@ module.exports = server;
 
 ### Rekomendasi :
 **Solusi 2**
+
+# Front End 
+
+bagaimana membuat tampilan front end
+
+- buat folder `public` di root
+- buat tampilan html sederhana di dalam public `index. html`
+- tambahkan di app.js
+  `app.use(express.static('public));`
+  digunakan utk membaca seluruh folder `public` yg terdapat di `root`
+- utk  
+

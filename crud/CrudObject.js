@@ -4,21 +4,35 @@ const createData = (bank, data) => {
 };
 
 const findById = (bank, id) => {
-  return bank.find((item) => item.id === id);
-};
-const findByName = (bank, name) => {
-  return bank.find((item) => item.name.includes(name));
+  return bank.find((value) => value.id === id);
 };
 
-const updateData = (bank, id, value) => {
-  const index = bank.findIndex((value) => value.id == id);
-  bank[index] = { id, name: value };
+const findByName = (bank, name) => {
+  return bank.find((value) => value.name.includes(name));
+};
+
+const updateData = (bank, id, value, num) => {
+  // mencari index [0,1,2,...]
+  if (typeof id === "string") {
+    id = parseInt(id);
+  }
+  const index = bank.findIndex((value,num) => value.id || num.id === id);
+  // mengubah data berdasarkan id
+
+  bank[index] = { ...bank[index], ...id, name: value, age:num };
+  // mengembalikan seluruh data yg telah diubah
   return bank;
 };
 
 const deleteData = (bank, id) => {
-  const index = bank.findIndex((value) => value.id == id);
+  const index = bank.findIndex((value) => {
+    
+    return value.id === id;
+  });
+
   bank.splice(index, 1);
+
   return bank;
 };
+
 module.exports = { createData, findById, updateData, deleteData, findByName };
