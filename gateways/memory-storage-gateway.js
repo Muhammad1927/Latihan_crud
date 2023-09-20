@@ -1,6 +1,7 @@
 const {
   createData,
   updateData,
+  updateAllData,
   deleteData,
   findByName,
 } = require("../crud/CrudObject");
@@ -20,8 +21,13 @@ const getDataByName = (name) => {
   return findByName(dataMemory, name);
 };
 
-const editNamaData = (id, name, age) => {
-  dataMemory = updateData(dataMemory, id, name, age);
+const editNamaData = (id, name) => {
+  dataMemory = updateData(dataMemory, id, name);
+
+  return dataMemory;
+};
+const editNamaUmurData = (id, name, age) => {
+  dataMemory = updateAllData(dataMemory, id, { name, age });
 
   return dataMemory;
 };
@@ -42,5 +48,6 @@ module.exports = {
   showAllData,
   editNamaData,
   removeData,
+  editNamaUmurData,
   getDataByName,
 };

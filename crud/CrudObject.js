@@ -11,18 +11,29 @@ const findByName = (bank, name) => {
   return bank.find((value) => value.name.includes(name));
 };
 
-const updateData = (bank, id, value, num) => {
+const updateData = (bank, id, value) => {
   // mencari index [0,1,2,...]
   if (typeof id === "string") {
     id = parseInt(id);
   }
-  const index = bank.findIndex((value,num) => value.id || num.id === id);
+  const index = bank.findIndex((value) => value.id === id);
   // mengubah data berdasarkan id
 
-  bank[index] = { ...bank[index], ...id, name: value, age:num };
+  bank[index] = { ...bank[index], id, name: value };
   // mengembalikan seluruh data yg telah diubah
   return bank;
 };
+
+const updateAllData = (bank, id, dataBaru) => {
+  if(typeof id === 'string'){
+    id = parseInt(id)
+  }
+  
+  const index = bank.findIndex((value) => value.id === id)
+
+  bank[index] = {...bank[index], ...dataBaru}
+   return bank;
+}
 
 const deleteData = (bank, id) => {
   const index = bank.findIndex((value) => {
@@ -35,4 +46,4 @@ const deleteData = (bank, id) => {
   return bank;
 };
 
-module.exports = { createData, findById, updateData, deleteData, findByName };
+module.exports = { createData, findById,  deleteData, findByName,updateData, updateAllData };

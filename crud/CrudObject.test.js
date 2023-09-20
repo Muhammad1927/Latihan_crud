@@ -1,4 +1,11 @@
-const { createData, findById, updateData, deleteData, findByName } = require("./CrudObject");
+const {
+  createData,
+  findById,
+  updateData,
+  updateAllData,
+  deleteData,
+  findByName,
+} = require("./CrudObject");
 
 describe("Test Crud Object", () => {
   test("when create new object should success", () => {
@@ -25,19 +32,23 @@ describe("Test Crud Object", () => {
 
     expect(result).toEqual({ id: 2, name: "bambang" });
   });
+test("4.when update data should success", () => {
+  let bank = [
+    { id: 1, name: "samsul" },
+    { id: 2, name: "bambang" },
+  ];
 
-  test("when update name should success", () => {
-    let bank = [
-      { id: 1, name: "samsul", age: 16 },
-      { id: 2, name: "bambang", age: 16 },
-    ];
-    let result = updateData(bank, 1, "arifin", 17);
-
-    expect(result).toEqual([
-      { id: 1, name: "arifin", age: 17 },
-      { id: 2, name: "bambang", age: 16 },
-    ]);
-  });
+  // mengubah ID 1 dengan nama Arifin
+  // menggunakan const index = objectArray.findIndex((value)=>value.id == id)
+  // cara ngubah data
+  // dataArray[index] = dataPenggantinya
+  // return dataArray;
+  let result = updateData(bank, 1, "arifin");
+  expect(result).toEqual([
+    { id: 1, name: "arifin" },
+    { id: 2, name: "bambang" },
+  ]);
+});
 
   test("when delete data should success", () => {
     let bank = [
@@ -53,8 +64,46 @@ describe("Test Crud Object", () => {
       { id: 1, name: "mufid" },
       { id: 2, name: "bambang" },
     ];
-    let result = findByName(bank, 'mufid');
+    let result = findByName(bank, "mufid");
 
     expect(result).toEqual({ id: 1, name: "mufid" });
   });
+
+  test("when update name should success", () => {
+    let bank = [
+      { id: 1, name: "samsul", age: 19 },
+      { id: 2, name: "bambang", age: 15 },
+    ];
+    let result = updateAllData(bank, 1, { name: "arifin" });
+
+    expect(result).toEqual([
+      { id: 1, name: "arifin", age: 19 },
+      { id: 2, name: "bambang", age: 15 },
+    ]);
+  });
+  test("when update name and umur should success", () => {
+    let bank = [
+      { id: 1, name: "samsul", age: 19 },
+      { id: 2, name: "bambang", age: 15 },
+    ];
+    let result = updateAllData(bank, 1, { name: "arifin", age: 20 });
+
+    expect(result).toEqual([
+      { id: 1, name: "arifin", age: 20 },
+      { id: 2, name: "bambang", age: 15 },
+    ]);
+  });
+  test("when update age and name with many datesshould success", () => {
+    let bank = [
+      { id: 1, name: "samsul", age: 19, email: "samsul@test.com" },
+      { id: 2, name: "bambang", age: 15, email: "bambang@test.com" },
+    ];
+    let result = updateAllData(bank, 1, { name: "arifin", age: 20 });
+
+    expect(result).toEqual([
+      { id: 1, name: "arifin", age: 20, email: "samsul@test.com" },
+      { id: 2, name: "bambang", age: 15, email: "bambang@test.com" },
+    ]);
+  });
+
 });
