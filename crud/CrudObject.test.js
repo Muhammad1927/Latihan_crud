@@ -105,5 +105,26 @@ test("4.when update data should success", () => {
       { id: 2, name: "bambang", age: 15, email: "bambang@test.com" },
     ]);
   });
+  test("when find id is founded should success", () => {
+    let bank = [
+      { id: 1, name: "samsul", age: 19 },
+      { id: 2, name: "bambang", age: 15 },
+    ];
+    let result = checId(bank, 1);
+
+    expect(result).toEqual(true);
+    // jangan cek type data, pastikan 
+    // findindex
+    // jika nilai true adalah -1 (berarti tidak di temukan)
+  });
+  test("when find id is not founded should success", () => {
+    let bank = [
+      { id: 1, name: "samsul", age: 19 },
+      { id: 2, name: "bambang", age: 15 },
+    ];
+    let result = checId(bank, 4);
+
+    expect(result).toEqual(false);
+  });
 
 });

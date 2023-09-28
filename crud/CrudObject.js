@@ -25,19 +25,18 @@ const updateData = (bank, id, value) => {
 };
 
 const updateAllData = (bank, id, dataBaru) => {
-  if(typeof id === 'string'){
-    id = parseInt(id)
+  if (typeof id === "string") {
+    id = parseInt(id);
   }
-  
-  const index = bank.findIndex((value) => value.id === id)
 
-  bank[index] = {...bank[index], ...dataBaru}
-   return bank;
-}
+  const index = bank.findIndex((value) => value.id === id);
+
+  bank[index] = { ...bank[index], ...dataBaru };
+  return bank;
+};
 
 const deleteData = (bank, id) => {
   const index = bank.findIndex((value) => {
-    
     return value.id === id;
   });
 
@@ -46,4 +45,22 @@ const deleteData = (bank, id) => {
   return bank;
 };
 
-module.exports = { createData, findById,  deleteData, findByName,updateData, updateAllData };
+const checkId = (bank, id) => {
+  if (typeof id === "string") {
+    id = parseInt(id);
+  }
+
+  const index = bank.findIndex((data) => data.id === id);
+
+  return index !== -1;
+};
+
+module.exports = {
+  createData,
+  findById,
+  deleteData,
+  findByName,
+  updateData,
+  updateAllData,
+  checkId,
+};

@@ -29,15 +29,10 @@ window.onload = () => {
         body: JSON.stringify({ id, age, name }),
       });
 
-      if (res.status !== 200) {
-        alert("Cek koneksi Anda atau cek data yang telah dimasukkan");
-        return;
-      }
-
       const resData = await res.json();
 
       if (resData.error) {
-        alert("Cek data yang telah dimasukkan");
+        alert(resData.message);
         return;
       }
 

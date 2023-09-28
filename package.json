@@ -4,7 +4,8 @@
     "supertest": "^6.3.3"
   },
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "mongodb": "^6.1.0"
   },
   "name": "practies_my_server",
   "description": "1. Buat Repo di Github",
